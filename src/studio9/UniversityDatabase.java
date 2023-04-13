@@ -1,26 +1,39 @@
 package studio9;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import assignment7.Student;
 
 public class UniversityDatabase {
-	//TODO: Complete this class according to the studio instructions
+	private final Map<String, Student> studentMap;
 
+	public UniversityDatabase() {
+		this.studentMap = new HashMap<String, Student>();
+	}
+	
 	public void addStudent(String accountName, Student student) {
-		// TODO
+		this.studentMap.put(accountName, student);
 	}
 
 	public int getStudentCount() {
-		// TODO
-		return 0;
+		return this.studentMap.size();
 	}
 
 	public String lookupFullName(String accountName) {
-		// TODO: Complete according to studio instructions
-		return null;
+		Student person = studentMap.get(accountName);
+		if (person == null) {
+			return null;
+		}
+		return person.getFullName();
 	}
 
 	public double getTotalBearBucks() {
-		// TODO
-		return 0.0;
+		double totalBearBucks = 0.0;
+		for (String currentPerson : studentMap.keySet()) {
+			Student person = studentMap.get(currentPerson);
+			totalBearBucks += person.getBearBucksBalance();
+		}
+		return totalBearBucks;
 	}
 }
